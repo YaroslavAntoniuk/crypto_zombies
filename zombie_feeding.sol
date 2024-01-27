@@ -26,7 +26,7 @@ interface IKitty {
 contract ZombieFeeding is ZombieFactory {
     IKitty kitty;
 
-    function setKittyContractAddress(address _address) external {
+    function setKittyContractAddress(address _address) external onlyOwner {
         kitty = IKitty(_address);
     }
 
