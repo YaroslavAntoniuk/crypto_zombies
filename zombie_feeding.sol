@@ -34,9 +34,11 @@ contract ZombieFeeding is ZombieFactory {
         uint _zombieId,
         uint _targetDna,
         string memory _species
-    ) public {
+    ) internal {
         require(msg.sender == zombieToOwner[_zombieId]);
         Zombie storage myZombie = zombies[_zombieId];
+
+        require(_isReady(myZombie));
 
         _targetDna = _targetDna % dnaModulus;
         uint newDna = (myZombie.dna + _targetDna) / 2;
@@ -49,6 +51,7 @@ contract ZombieFeeding is ZombieFactory {
         }
 
         _createZombie("NoName", newDna);
+        _triggerCooldown(myZombie);
     }
 
     function _triggerCooldown(Zombie storage _zombie) internal {
