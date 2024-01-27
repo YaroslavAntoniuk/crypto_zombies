@@ -51,6 +51,14 @@ contract ZombieFeeding is ZombieFactory {
         _createZombie("NoName", newDna);
     }
 
+    function _triggerCooldown(Zombie storage _zombie) internal {
+        _zombie.readyTime = uint32(block.timestamp + cooldownTime);
+    }
+
+    function _isReady(Zombie storage _zombie) internal view returns (bool) {
+        return (_zombie.readyTime <= block.timestamp);
+    }
+
     function feedOnKitty(uint _zombieId, uint _kittyId) public {
         uint kittyDna;
 
