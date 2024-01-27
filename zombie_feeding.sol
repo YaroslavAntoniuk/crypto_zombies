@@ -24,8 +24,11 @@ interface IKitty {
 }
 
 contract ZombieFeeding is ZombieFactory {
-    address ckAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d;
-    IKitty kitty = IKitty(ckAddress);
+    IKitty kitty;
+
+    function setKittyContractAddress(address _address) external {
+        kitty = IKitty(_address);
+    }
 
     function feedAndMultiply(
         uint _zombieId,
