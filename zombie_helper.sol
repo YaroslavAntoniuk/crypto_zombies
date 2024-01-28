@@ -3,6 +3,8 @@ pragma solidity ^0.8.24;
 import "./zombie_feeding.sol";
 
 contract ZombieHelper is ZombieFeeding {
+    using SafeMath32 for uint32;
+
     uint levelUpFee = 0.001 ether;
 
     modifier aboveLevel(uint _level, uint _zombieId) {
@@ -23,7 +25,7 @@ contract ZombieHelper is ZombieFeeding {
     function levelUp(uint _zombieId) external payable {
         require(msg.value == levelUpFee);
 
-        zombies[_zombieId].level++;
+        zombies[_zombieId].level = zombies[_zombieId].level.add(1);
     }
 
     function changeName(
