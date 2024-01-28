@@ -18,4 +18,12 @@ contract ZombieOwnerShip is ZombieAttack, ERC721 {
         zombieToOwner[_tokenId] = _to;
         emit Transfer(_from, _to, _tokenId);
     }
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _tokenId
+    ) external payable {}
+
+    function approve(address _approved, uint256 _tokenId) external payable {}
 }
