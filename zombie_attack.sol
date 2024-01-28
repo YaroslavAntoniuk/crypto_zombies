@@ -17,7 +17,10 @@ contract ZombieAttack is ZombieHelper {
             ) % _modulus;
     }
 
-    function attack(uint _zombieId, uint _targetId) external {
+    function attack(
+        uint _zombieId,
+        uint _targetId
+    ) external onlyOwnerOf(_zombieId) {
         Zombie storage myZombie = zombies[_zombieId];
         Zombie storage enemyZombie = zombies[_targetId];
         uint rand = randMod(100);
