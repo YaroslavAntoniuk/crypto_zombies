@@ -6,11 +6,37 @@
   <title>CryptoZombies front-end</title>
   <script language="javascript" type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script language="javascript" type="text/javascript" src="web3.min.js"></script>
+  <script language="javascript" type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.4.0/web3.min.js"></script>
+  <script language="javascript" type="text/javascript" src="cryptozombies_abi.js"></script>
+
 </head>
 
 <body>
 
+  <script>
+    let cryptoZombies;
+
+    function startApp() {
+      const cryptoZombiesAddress = "CRYPTO_ADDRESS";
+      cryptoZombies = new web3js.eth.Contract(cryptoZombiesABI, cryptoZombiesAddress);
+    }
+
+    let web3js; // a variable to store local web3 object
+    window.addEventListener('load', function () {
+      // Check if Web3 object is injected by Ethereum compatible browser such as MetaMask/Mist
+      if (typeof web3 !== 'undefined') {
+        // Initialize Web3 using a provider of MetaMask/Mist
+        web3js = new Web3(web3.currentProvider);
+      } else {
+        // Initialize Web3 when MetaMask/Mist is not available.
+        // Using the infura.io as a provider in the example below.
+        web3js = new Web3('wss://mainnet.infura.io/ws');
+      }
+
+      startApp();
+    });
+  </script>
 </body>
 
 </html>
