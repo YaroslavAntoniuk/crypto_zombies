@@ -2,8 +2,11 @@
 pragma solidity ^0.8.0;
 
 import "./ownable.sol";
+import "./safe_math.sol";
 
 contract ZombieFactory is Ownable {
+    using SafeMath for uint256;
+
     event NewZombie(uint zombieId, string name, uint dna);
 
     uint dnaDigits = 16;
